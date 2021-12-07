@@ -1,10 +1,13 @@
 package co.il.dmobile.myapplication_2;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -17,6 +20,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         this.Users = users;
     }
 
+    public void AddContact(User user)
+    {
+        Users.add(user);
+        notifyDataSetChanged();
+    }
+
+    public void DeleteContact(int position)
+    {
+        Users.remove(position);
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +46,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         holder.avatar.setImageResource(user.getImage());
         holder.name.setText(user.getName());
         holder.email.setText(user.getEmail());
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(),MainActivity2.class);
+                i.putExtra("user",user);
+                ActivityOptionsCompat options =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) v.getContext(),
+                                holder.avatar,
+                                "avatarTrasnition"
+                        );
+                v.getContext().startActivity(i,options.toBundle());
+            }
+        });
     }
 
     @Override
