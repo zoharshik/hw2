@@ -71,9 +71,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bundle b = data.getExtras();
-        User user = (User) b.getSerializable("user");
-        adapter.AddContact(user);
-
+        if (resultCode==1) {
+            Bundle b = data.getExtras();
+            User user = (User) b.getSerializable("user");
+            adapter.AddContact(user);
+        }
     }
 }
