@@ -17,8 +17,8 @@ public class MainActivity2 extends AppCompatActivity {
         User user = (User) b.getSerializable("user");
 
         ImageView avatar = findViewById(R.id.avater);
-        TextView name = findViewById(R.id.name);
-        TextView email = findViewById(R.id.email);
+        TextView name = findViewById(R.id.model);
+        TextView email = findViewById(R.id.brand);
 
         avatar.setImageResource(user.getImage());
         name.setText(user.getName());
